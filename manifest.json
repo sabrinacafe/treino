@@ -1,0 +1,17 @@
+{
+  "name": "7 — Treino Híbrido",
+  "short_name": "Treino 7",
+  "description": "Fichas de musculação, mobilidade e check-ins de muay thai, futebol e natação.",
+  "start_url": "./index.html",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#050506",
+  "theme_color": "#050506",
+  "lang": "pt-BR",
+  "icons": [
+    { "src": "icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any" },
+    { "src": "icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any" },
+    { "src": "icon-maskable.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
+  ]
+}
