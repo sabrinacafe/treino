@@ -375,19 +375,20 @@ nav button.on{color:var(--musc)}
   </div>
 
   <div class="card">
-    <h3>Check-in de hoje</h3>
+    <h3 id="ciTit">Check-in de hoje</h3>
     <p class="lede">Marque tudo que você treinou. O painel inteiro vem daqui.</p>
+    <div class="fl" style="margin-bottom:10px"><label>Dia do check-in</label><input type="date" id="ciData"></div>
     <div class="ci" id="ciBox"></div>
   </div>
 
   <div class="card">
     <h3>Frequência da semana</h3>
-    <p class="lede">3× é o ideal. Em semana apertada, A + B já cobre o corpo todo, porque B é full body.</p>
+    <p class="lede">3× é o ideal. Em semana apertada, dois dos três já cobrem o corpo todo — agora os três são full body.</p>
     <div class="seg" id="modeSeg"><button data-m="3x">3× · A B C</button><button data-m="2x">2× · A B</button></div>
     <ul class="rules" style="margin-top:12px">
-      <li><b>3× (ideal):</b> A inferiores na segunda, B full body na quarta, C superiores na sexta. Sexta é superior de propósito — pernas descansadas para o jogo de sábado.</li>
-      <li><b>2×:</b> A e B. Você perde volume de superior, mas o B tem puxada, empurrada e rotação, então nada fica sem estímulo. No modo 2× o app soma 1 série aos compostos do B.</li>
-      <li><b>1× (semana caótica):</b> só o B. É o treino mais completo dos três.</li>
+      <li><b>3× (ideal):</b> Fullbody 1 na segunda, 2 na quarta, 3 na sexta. Os três são de corpo inteiro, então o que conta é a constância, não a ordem.</li>
+      <li><b>2×:</b> A e B. Você perde volume, mas como cada treino tem perna, puxada e empurrada, nenhum grupo fica sem estímulo na semana.</li>
+      <li><b>1× (semana caótica):</b> qualquer um dos três. Nenhum deixa um grupo de fora.</li>
       <li><b>Nunca compense</b> juntando dois treinos no mesmo dia. Perder uma sessão custa pouco; treinar 2h30 exausta custa a terça no tatame.</li>
     </ul>
   </div>
@@ -571,95 +572,111 @@ function figura(l,p1,p2){const S=SH[l];let p='';
 
 /* ============ PROGRAMA ============ */
 const P={
-A:{l:'A',dia:'Segunda',nome:'Inferiores',res:'O treino mais pesado da semana. Base de força para arranque, chute e mudança de direção.',ex:[
- {id:'a1',n:'Salto vertical ou no caixote',s:3,min:4,max:5,rir:'máximo',d:'2 min',v:'box jump técnica correta salto caixote',
-  p:['quad','gluteo'],sc:['pant','abdomen'],
-  x:['Pés na largura do quadril, desça até meio agachamento em um movimento rápido.','Salte explodindo pelo quadril e jogando os braços para cima.','Aterrisse com o joelho macio, absorvendo o impacto — nunca com a perna travada.','Se for caixote, desça caminhando; não pule para baixo.'],
-  e:['Perder altura ao longo da série — se o salto encolher, encerre.','Aterrissar com o joelho caindo para dentro.']},
- {id:'a2',n:'Agachamento livre',s:4,min:6,max:8,rir:'RIR 2',d:'2–3 min',v:'agachamento livre técnica mulher',
+A:{l:'A',dia:'Segunda',nome:'Fullbody 1',res:'Agachamento e barra assistida na frente, com você inteira. Os três treinos agora são de corpo inteiro — nenhum grupo espera a semana seguinte.',ex:[
+ {id:'f1e1',n:'Agachamento no smith (29)',s:4,min:6,max:8,rir:'RIR 2',d:'2–3 min',v:'agachamento máquina smith técnica mulher',
   p:['quad','gluteo'],sc:['adutor','lombar','abdomen'],
-  x:['Barra no trapézio, pés na largura dos ombros, pontas levemente abertas.','Inspire, prenda o ar e trave o abdômen antes de descer.','Desça controlada até a coxa ficar paralela ao chão ou um pouco abaixo.','Suba empurrando o chão com o pé inteiro, expirando na metade.'],
-  e:['Joelho colapsando para dentro na subida — pense em "afastar o chão".','Calcanhar saindo do chão: falta mobilidade de tornozelo.']},
- {id:'a3',n:'Levantamento terra romeno',s:3,min:8,max:10,rir:'RIR 2',d:'2 min',v:'levantamento terra romeno stiff técnica',
-  p:['post','gluteo'],sc:['lombar','dorsal'],
-  x:['Barra na frente das coxas, joelho levemente flexionado e fixo nesse ângulo.','Empurre o quadril para trás deixando a barra raspar a coxa.','Pare quando sentir o posterior alongar ou quando a lombar arredondar.','Volte contraindo o glúteo, sem hiperestender no topo.'],
-  e:['Transformar em agachamento dobrando o joelho junto.','Afastar a barra do corpo, jogando a carga na lombar.']},
- {id:'a4',n:'Afundo búlgaro',s:3,min:8,max:10,rir:'RIR 2',d:'90 s',v:'afundo bulgaro técnica correta',
+  x:['Pés um pouco à frente do corpo, na largura dos ombros, barra apoiada no trapézio.','Destrave girando os pulsos e desça controlada até a coxa passar da paralela.','A guia do smith tira o equilíbrio da conta — use isso para descer mais fundo, não para pegar mais peso.','Suba empurrando o chão com o pé inteiro, sem travar o joelho no topo.'],
+  e:['Pé muito à frente, que joga a carga toda no joelho na subida.','Encurtar a descida porque a máquina permite carga alta — amplitude antes de peso.']},
+ {id:'f1e2',n:'Barra no gravitron',s:4,min:6,max:8,rir:'RIR 2',d:'2 min',v:'barra fixa gravitron assistida técnica',
+  p:['dorsal'],sc:['biceps','trapezio','delt_p'],
+  x:['Registre a carga de assistência: aqui quanto MENOR o número, mais forte você está.','Comece do braço estendido, sem soltar o ombro da articulação.','Puxe levando o peito à barra, cotovelo descendo para baixo e para trás.','Desça em 3 segundos — a negativa é o que constrói a primeira barra livre.'],
+  e:['Encurtar a amplitude embaixo para fechar a série.','Subir a assistência no meio da série em vez de encerrar.']},
+ {id:'f1e3',n:'Mesa flexora (05)',s:3,min:10,max:12,rir:'RIR 2',d:'75 s',v:'mesa flexora deitada técnica correta',
+  p:['post'],sc:['pant','gluteo'],
+  x:['Deitada, o rolo logo acima do calcanhar e o joelho livre da borda do banco.','Quadril colado no apoio o movimento inteiro.','Flexione até o rolo quase tocar o glúteo e segure 1 segundo.','Desça em 3 segundos, sem deixar o peso bater na pilha.'],
+  e:['Levantar o quadril para ajudar na subida.','Soltar a volta e perder justamente a parte que protege o posterior.']},
+ {id:'f1e4',n:'Desenvolvimento com halteres',s:4,min:10,max:12,rir:'RIR 2',d:'90 s',v:'desenvolvimento com halteres sentado técnica',
+  p:['delt_a'],sc:['triceps','trapezio','abdomen'],
+  x:['Sentada com o banco quase reto, costela para baixo e abdômen travado.','Halteres na altura das orelhas, cotovelo levemente à frente do tronco.','Empurre para cima até quase estender, sem bater os halteres.','Desça controlada até a altura do queixo, sentindo o ombro trabalhar.'],
+  e:['Arquear a lombar para empurrar mais peso.','Abrir o cotovelo em linha com as orelhas, o que castiga o ombro.']},
+ {id:'f1e5',n:'Cadeira extensora articulada (07)',s:3,min:10,max:12,rir:'RIR 2',d:'75 s',v:'cadeira extensora técnica correta',
+  p:['quad'],sc:[],
+  x:['Ajuste o encosto para o joelho ficar alinhado ao eixo da máquina.','Estenda até quase travar e segure 1 segundo no topo.','Desça em 3 segundos — a fase negativa é o estímulo.','Expire ao estender; não prenda a respiração.'],
+  e:['Jogar o quadril para cima para ajudar — glúteo colado no banco.','Soltar a carga na descida em vez de frear.']},
+ {id:'f1e6',n:'Rosca direta',s:3,min:10,max:12,rir:'RIR 2',d:'60 s',v:'rosca direta barra técnica correta',
+  p:['biceps'],sc:['antebraco'],
+  x:['Em pé, cotovelo fixo ao lado do tronco do início ao fim.','Suba até a contração completa sem levar o cotovelo à frente.','Desça em 2 a 3 segundos, estendendo o braço por inteiro.','Punho firme e neutro — pegada forte é o que segura a guarda.'],
+  e:['Balançar o tronco para tirar a barra do ponto travado.','Parar no meio da descida e nunca estender o braço.']},
+ {id:'f1e7',n:'Gêmeos sentado (34)',s:3,min:10,max:12,rir:'RIR 1',d:'60 s',v:'panturrilha sentado máquina técnica',
+  p:['pant'],sc:[],
+  x:['Ponta do pé na plataforma, calcanhar livre para descer abaixo da linha.','Suba o mais alto que conseguir e segure 2 segundos contraída.','Desça até o alongamento completo, sem quicar.','Joelho dobrado aqui pega o sóleo, a parte que aguenta corrida longa.'],
+  e:['Amplitude curta e rápida, o erro mais comum do exercício.','Empurrar com as mãos no apoio e tirar carga da panturrilha.']},
+ {id:'f1e8',n:'Prancha isométrica',s:3,min:30,max:60,rir:'até a falha · segundos',d:'45 s',v:'prancha isométrica abdominal técnica correta',
+  p:['abdomen'],sc:['obliquo','gluteo'],
+  x:['Antebraços no chão, cotovelo embaixo do ombro, corpo em linha reta do calcanhar à cabeça.','Contraia glúteo e abdômen juntos e respire normal — não prenda o ar.','Registre os segundos no campo de repetições. Vá até a falha de postura, não de dor.','Quando a lombar começar a ceder, encerre: a série acabou ali.'],
+  e:['Quadril caindo aos poucos sem você perceber — filme de lado uma vez.','Empinar o quadril para aliviar, o que tira o abdômen da conta.']}]},
+
+B:{l:'B',dia:'Quarta',nome:'Fullbody 2',res:'Terra, supino e remada no mesmo dia — o treino mais pesado de tronco da semana. Adutor e abdutor no fim são o que segura o joelho no chute e na mudança de direção.',ex:[
+ {id:'f2e1',n:'Levantamento terra',s:4,min:6,max:8,rir:'RIR 2',d:'2–3 min',v:'levantamento terra convencional técnica mulher',
+  p:['post','gluteo'],sc:['lombar','dorsal','trapezio'],
+  x:['Barra rente à canela, pés na largura do quadril, mão por fora da perna.','Encaixe o quadril para baixo, peito alto e lombar neutra antes de tirar a barra do chão.','Empurre o chão com a perna, deixando a barra raspar a coxa na subida.','Trave glúteo no topo sem jogar o quadril à frente, e desça pelo mesmo caminho.'],
+  e:['Puxar com as costas antes da perna — o quadril sobe primeiro e a lombar arredonda.','Afastar a barra do corpo, o que multiplica a carga na lombar.']},
+ {id:'f2e2',n:'Supino com halteres',s:4,min:10,max:12,rir:'RIR 2',d:'2 min',v:'supino reto com halteres técnica',
+  p:['peito'],sc:['delt_a','triceps'],
+  x:['Escápula encaixada no banco e peito aberto do início ao fim.','Cotovelo a cerca de 45 graus do tronco, nunca aberto em T.','Desça até o halter na linha do peito, sentindo alongar.','Empurre para cima e levemente para dentro, sem bater os halteres.'],
+  e:['Descer demais até o ombro girar para a frente.','Arquear a lombar para empurrar mais peso.']},
+ {id:'f2e3',n:'Remada curvada',s:4,min:10,max:12,rir:'RIR 2',d:'90 s',v:'remada curvada barra técnica',
+  p:['dorsal'],sc:['trapezio','delt_p','biceps','lombar'],
+  x:['Quadril para trás, tronco a cerca de 45 graus, coluna neutra.','Puxe a barra ao umbigo, cotovelo rente ao corpo.','Segure meio segundo contraída e desça controlada.','O tronco fica parado: quem se move é só o braço.'],
+  e:['Levantar o tronco a cada repetição — sinal de carga alta.','Arredondar a lombar, o erro mais perigoso aqui.']},
+ {id:'f2e4',n:'Agachamento búlgaro',s:4,min:10,max:12,rir:'RIR 2',d:'90 s',v:'afundo bulgaro técnica correta',
   p:['quad','gluteo'],sc:['adutor','abdutor','abdomen'],
   x:['Pé de trás no banco, pé da frente a um passo largo à frente.','Desça na vertical até o joelho de trás quase tocar o chão.','Tronco inclinado à frente pega mais glúteo; ereto pega mais quadríceps.','Registre a carga de um halter. Todas as reps de uma perna, depois troque.'],
   e:['Passo curto demais, que joga o joelho muito à frente do pé.','Perder equilíbrio para o lado — reduza a carga, não a amplitude.']},
- {id:'a5',n:'Cadeira extensora unilateral',s:3,min:10,max:12,rir:'RIR 2',d:'75 s',v:'cadeira extensora unilateral técnica',
-  p:['quad'],sc:[],
-  x:['Ajuste o encosto para o joelho ficar alinhado ao eixo da máquina.','Estenda uma perna por vez até quase travar, segurando 1 segundo no topo.','Desça em 3 segundos, controlando — a fase negativa é o estímulo.','Expire ao estender; não segure a respiração.'],
-  e:['Jogar o quadril para cima para ajudar — glúteo colado no banco.','Soltar a carga na descida em vez de frear.']},
- {id:'a6',n:'Nordic curl (progressão)',s:3,min:4,max:6,rir:'excêntrico',d:'90 s',v:'nordic hamstring curl progressão iniciante',
-  p:['post'],sc:['gluteo','abdomen'],
-  x:['Ajoelhada com tornozelos presos, corpo em linha reta do joelho à cabeça.','Desça o mais devagar que conseguir, resistindo com o posterior.','Amorteça com as mãos e empurre para voltar.','Registre 0 kg e conte as repetições, salvo se usar carga extra.'],
-  e:['Dobrar o quadril e "sentar" na descida, tirando o posterior.','Volume demais no começo: dor muscular por dias.']},
- {id:'a7',n:'Panturrilha em pé',s:3,min:12,max:15,rir:'RIR 1',d:'60 s',v:'elevação panturrilha em pé técnica',
-  p:['pant'],sc:[],
-  x:['Ponta do pé no degrau, calcanhar livre para descer abaixo da linha.','Suba o mais alto que conseguir e segure 2 segundos contraída.','Desça até o alongamento completo, sem quicar.'],
-  e:['Amplitude curta e rápida, o erro mais comum do exercício.','Apoiar peso nas mãos e tirar carga da panturrilha.']}]},
+ {id:'f2e5',n:'Elevação lateral',s:3,min:10,max:12,rir:'RIR 2',d:'60 s',v:'elevação lateral halteres técnica correta',
+  p:['delt_a'],sc:['trapezio'],
+  x:['Em pé, cotovelo levemente dobrado e fixo nesse ângulo.','Suba pelos lados até a mão chegar à altura do ombro, não acima.','Conduza o movimento pelo cotovelo, como se ele puxasse o halter.','Desça em 2 a 3 segundos, sem deixar o braço cair.'],
+  e:['Encolher o trapézio e subir o ombro junto.','Usar impulso do tronco — se precisa balançar, reduza a carga.']},
+ {id:'f2e6',n:'Extensor lombar (32)',s:3,min:10,max:12,rir:'RIR 2',d:'60 s',v:'extensora lombar banco romano técnica',
+  p:['lombar'],sc:['gluteo','post'],
+  x:['Apoio na altura do quadril, não na costela, para o movimento sair da lombar.','Desça até sentir o posterior e a lombar alongarem.','Suba até o tronco alinhar com a perna e pare ali.','Contraia o glúteo no topo em vez de forçar a lombar para trás.'],
+  e:['Hiperestender no topo, jogando o tronco para cima da linha.','Fazer rápido e com impulso, o que transforma em balanço.']},
+ {id:'f2e7',n:'Cadeira adutora (01)',s:3,min:12,max:15,rir:'RIR 2',d:'45 s',v:'cadeira adutora técnica correta',
+  p:['adutor'],sc:[],
+  x:['Costas apoiadas no encosto, joelho encaixado nos apoios.','Feche as pernas de forma controlada e segure 1 segundo no fim.','Abra em 3 segundos até sentir o adutor alongar.','Adutor forte é o que protege a virilha no chute e no drible.'],
+  e:['Deixar o peso abrir as pernas sozinho na volta.','Jogar o tronco à frente para conseguir fechar.']},
+ {id:'f2e8',n:'Cadeira abdutora (02)',s:3,min:12,max:15,rir:'RIR 2',d:'45 s',v:'cadeira abdutora técnica correta',
+  p:['abdutor'],sc:['gluteo'],
+  x:['Sentada com a coluna apoiada, sem inclinar o tronco à frente.','Abra até o limite confortável e segure 1 segundo contraída.','Feche em 3 segundos, controlando a volta.','É o glúteo médio: é ele que impede o joelho de cair para dentro.'],
+  e:['Usar impulso e bater a pilha de peso a cada repetição.','Inclinar o tronco à frente, o que troca o glúteo médio pela lombar.']},
+ {id:'f2e9',n:'Abdominal supra no declinado',s:3,min:10,max:12,rir:'RIR 2',d:'45 s',v:'abdominal supra banco declinado técnica',
+  p:['abdomen'],sc:['obliquo'],
+  x:['Pés travados no apoio, mãos no peito ou ao lado da cabeça sem puxar o pescoço.','Enrole a coluna subindo vértebra por vértebra, não em bloco.','Suba só até a escápula sair do banco e expire no topo.','Desça em 3 segundos, sem relaxar totalmente entre as reps.'],
+  e:['Puxar a cabeça com as mãos e forçar o pescoço.','Subir em bloco usando o flexor do quadril em vez do abdômen.']}]},
 
-B:{l:'B',dia:'Quarta',nome:'Full Body',res:'O treino mais completo dos três. Empurrar, puxar, agachar, girar. Em semana de 2×, é este que você não pode perder.',ex:[
- {id:'b1',n:'Elevação pélvica (hip thrust)',s:3,s2:4,min:8,max:12,rir:'RIR 2',d:'2 min',v:'hip thrust elevação pélvica técnica',
-  p:['gluteo'],sc:['post','abdomen'],
-  x:['Costas no banco na linha da ponta da escápula, barra sobre o quadril com proteção.','Queixo no peito e costela para baixo o movimento inteiro.','Suba até o tronco ficar paralelo ao chão e segure 1 segundo.','Desça controlada sem encostar totalmente no chão.'],
-  e:['Hiperestender a lombar no topo em vez de contrair o glúteo.','Empurrar com a ponta do pé — o apoio é no calcanhar.']},
- {id:'b2',n:'Cadeira extensora unilateral',s:3,min:12,max:15,rir:'RIR 2',d:'60 s',v:'cadeira extensora unilateral técnica',
-  p:['quad'],sc:[],
-  x:['Mesma execução do treino A, com faixa de repetições mais alta e carga menor.','Segure 1 segundo no topo, desça em 3 segundos.','Compare os lados: se um faz 15 e o outro 11, respeite o lado fraco.'],
-  e:['Compensar com o tronco quando cansa.','Ignorar a assimetria entre as pernas.']},
- {id:'b3',n:'Puxada alta ou barra assistida',s:3,s2:4,min:8,max:10,rir:'RIR 2',d:'2 min',v:'puxada alta pegada pronada técnica',
+C:{l:'C',dia:'Sexta',nome:'Fullbody 3',res:'Leg press e pulley abrindo, tríceps e prancha lateral fechando. Fecha a semana com o corpo inteiro, do quadríceps ao core.',ex:[
+ {id:'f3e1',n:'Leg press 45',s:4,min:6,max:8,rir:'RIR 2',d:'2–3 min',v:'leg press 45 graus técnica correta',
+  p:['quad','gluteo'],sc:['post','adutor'],
+  x:['Pés na largura dos ombros, na metade de cima da plataforma.','Desça até o joelho chegar perto de 90 graus, sem a lombar descolar do encosto.','Empurre com o pé inteiro e pare antes de travar o joelho no fim.','Se a lombar arredondar embaixo, você desceu além da sua amplitude: suba os pés na plataforma.'],
+  e:['Descer tanto que o quadril enrola e a lombar sai do apoio.','Travar o joelho no topo e descansar na articulação em vez do músculo.']},
+ {id:'f3e2',n:'Pulley frente',s:4,min:10,max:12,rir:'RIR 2',d:'2 min',v:'puxada frente pulley técnica correta',
   p:['dorsal'],sc:['biceps','trapezio','delt_p'],
-  x:['Pegada um pouco mais larga que os ombros, peito aberto.','Puxe a barra à clavícula levando o cotovelo para baixo e para trás.','Segure meio segundo embaixo, sentindo as costas contraírem.','Suba controlada até estender o cotovelo sem soltar o ombro.'],
-  e:['Puxar com o bíceps e jogar o tronco para trás.','Encolher o ombro na subida.']},
- {id:'b4',n:'Supino inclinado com halteres',s:3,min:8,max:10,rir:'RIR 2',d:'2 min',v:'supino inclinado halteres técnica',
-  p:['peito'],sc:['delt_a','triceps'],
-  x:['Banco a 30–45 graus, escápula encaixada e peito aberto.','Cotovelo a cerca de 45 graus do tronco, nunca aberto em T.','Desça até o halter na linha do peito, sentindo alongar.','Empurre para cima e levemente para dentro, sem bater os halteres.'],
-  e:['Descer até o ombro girar para a frente.','Arquear demais a lombar para empurrar mais peso.']},
- {id:'b5',n:'Remada unilateral com halter',s:3,min:10,max:12,rir:'RIR 2',d:'75 s',v:'remada unilateral halter serrote técnica',
-  p:['dorsal'],sc:['biceps','trapezio','obliquo'],
-  x:['Um joelho e uma mão no banco, coluna paralela ao chão e neutra.','Puxe o halter em direção ao quadril, cotovelo colado ao corpo.','Segure 1 segundo no topo e desça em 2 a 3 segundos.','Todas as reps de um lado antes de trocar.'],
-  e:['Girar o tronco para levantar mais peso — o core é quem segura.','Puxar em direção ao ombro em vez do quadril.']},
- {id:'b6',n:'Prancha de Copenhagen',s:3,min:20,max:30,rir:'segundos',d:'45 s',v:'copenhagen plank adutor progressão',
-  p:['adutor'],sc:['obliquo','abdomen'],
-  x:['De lado, antebraço no chão, perna de cima apoiada no banco pelo joelho (fácil) ou pelo pé (difícil).','Suba o quadril até o corpo formar linha reta e segure.','Registre os segundos no campo de repetições. Cada lado.'],
-  e:['Deixar o quadril cair sem perceber — filme de lado uma vez para conferir.','Pular para a versão com o pé sem passar pela do joelho.']},
- {id:'b7',n:'Rotação de tronco no cabo (woodchop)',s:3,min:8,max:10,rir:'RIR 2',d:'60 s',v:'woodchop cabo rotação tronco técnica',
-  p:['obliquo'],sc:['abdomen','delt_a','gluteo'],
-  x:['Pés fixos, gire pelo quadril e pelo tronco, não só pelos braços.','Rápido na fase de puxar, lento na volta.','Cada lado. Aqui mora a potência do rodado e do cruzado.'],
-  e:['Fazer só dobrando e esticando os braços, sem rotação real.','Carga alta demais, que vira balanço com a lombar.']}]},
-
-C:{l:'C',dia:'Sexta',nome:'Superiores',res:'Véspera de jogo: nada de perna. Puxada, empurrada e ombro saudável para aguentar 2 horas de guarda alta.',ex:[
- {id:'c1',n:'Barra fixa assistida ou puxada supinada',s:4,min:6,max:10,rir:'RIR 2',d:'2 min',v:'barra fixa assistida progressão iniciante mulher',
-  p:['dorsal'],sc:['biceps','trapezio'],
-  x:['Na assistida, registre a carga de assistência: quanto menor, mais forte você está.','Comece do braço estendido, sem soltar o ombro.','Puxe levando o peito à barra, cotovelo para baixo.','Desça em 3 segundos — a negativa constrói a primeira barra livre.'],
-  e:['Encurtar a amplitude embaixo para conseguir mais repetições.','Balançar o corpo para ganhar impulso.']},
- {id:'c2',n:'Desenvolvimento militar em pé',s:3,min:8,max:10,rir:'RIR 2',d:'2 min',v:'desenvolvimento militar em pé técnica',
-  p:['delt_a'],sc:['triceps','abdomen','trapezio'],
-  x:['Em pé, pés na largura do quadril, glúteo e abdômen contraídos.','Barra ou halteres na altura do queixo, cotovelo levemente à frente.','Empurre até estender, levando a cabeça um pouco à frente no fim.','Desça controlada até a altura do queixo.'],
-  e:['Arquear a lombar para compensar falta de mobilidade de ombro.','Empurrar para a frente em vez de para cima.']},
- {id:'c3',n:'Remada curvada',s:3,min:8,max:10,rir:'RIR 2',d:'90 s',v:'remada curvada barra técnica',
-  p:['dorsal'],sc:['trapezio','delt_p','biceps','lombar'],
-  x:['Quadril para trás, tronco a cerca de 45 graus, coluna neutra.','Puxe a barra ao umbigo, cotovelo rente ao corpo.','Segure meio segundo e desça controlada.'],
-  e:['Levantar o tronco a cada repetição — sinal de carga alta.','Arredondar a lombar, o erro mais perigoso aqui.']},
- {id:'c4',n:'Supino reto com halteres ou flexão',s:3,min:8,max:12,rir:'RIR 2',d:'90 s',v:'flexão de braço progressão técnica correta',
-  p:['peito'],sc:['triceps','delt_a','abdomen'],
-  x:['Na flexão, corpo em linha reta do calcanhar à cabeça, mão na linha do peito.','Desça até o peito ficar a um punho do chão, cotovelo a 45 graus.','Registre 0 kg e conte as reps se for flexão.','Progrida elevando os pés antes de adicionar peso.'],
-  e:['Quadril caindo ou empinando na flexão.','Cotovelo aberto em T, que castiga o ombro.']},
- {id:'c5',n:'Face pull + rotação externa',s:3,min:12,max:15,rir:'RIR 3',d:'60 s',v:'face pull técnica correta ombro',
-  p:['delt_p'],sc:['trapezio'],
-  x:['Cabo ou elástico na altura do rosto, puxe em direção à testa.','No fim, gire os punhos para fora, como se fosse mostrar bíceps.','Leve e controlado — é seguro de ombro, não competição de carga.'],
-  e:['Carga alta que transforma em remada alta.','Encolher o trapézio superior na puxada.']},
- {id:'c6',n:'Bi-set: rosca martelo + tríceps corda',s:3,min:10,max:12,rir:'RIR 2',d:'60 s',v:'rosca martelo triceps corda técnica',
-  p:['biceps','triceps'],sc:['antebraco'],
-  x:['Faça as reps de rosca martelo e emende no tríceps sem descansar.','Cotovelo fixo ao lado do corpo nos dois.','Registre a carga da rosca martelo.','Punho e antebraço fortes protegem nos socos e melhoram a pegada.'],
-  e:['Balançar o tronco quando cansa.','Abrir o cotovelo para longe do corpo no tríceps.']},
- {id:'c7',n:'Pallof press + prancha lateral',s:3,min:10,max:12,rir:'anti-rotação',d:'45 s',v:'pallof press técnica anti rotação',
-  p:['obliquo','abdomen'],sc:['gluteo'],
-  x:['De lado para o cabo, empurre as mãos à frente do peito e resista à rotação.','Segure 2 segundos com o braço estendido antes de voltar.','Emende com 30 segundos de prancha lateral do mesmo lado.','Cada lado. Aqui você resiste à rotação; no B você produz.'],
-  e:['Deixar o tronco girar em direção ao cabo.','Prender a respiração durante a isometria.']}]}};
+  x:['Pegada um pouco mais larga que os ombros, peito aberto e tronco quase reto.','Puxe a barra à clavícula levando o cotovelo para baixo e para trás.','Segure meio segundo embaixo, sentindo as costas contraírem.','Suba controlada até estender o cotovelo sem soltar o ombro.'],
+  e:['Puxar com o bíceps e jogar o tronco para trás para compensar.','Encolher o ombro na subida em vez de manter a escápula encaixada.']},
+ {id:'f3e3',n:'Cadeira flexora (04)',s:3,min:10,max:12,rir:'RIR 2',d:'75 s',v:'cadeira flexora sentada técnica',
+  p:['post'],sc:['pant'],
+  x:['Joelho alinhado ao eixo da máquina e o rolo logo acima do calcanhar.','Puxe o rolo para baixo e para trás, segurando 1 segundo no fim.','Volte em 3 segundos, sem deixar a carga te empurrar.','Sentada o posterior trabalha alongado — é o complemento da mesa flexora.'],
+  e:['Deslizar o quadril à frente no banco quando cansa.','Amplitude curta, indo e voltando só no meio do movimento.']},
+ {id:'f3e4',n:'Elevação frontal na polia',s:3,min:10,max:12,rir:'RIR 2',d:'60 s',v:'elevação frontal polia técnica correta',
+  p:['delt_a'],sc:['peito','trapezio'],
+  x:['Polia baixa, de costas para o aparelho, braço quase estendido.','Suba à frente até a mão chegar à altura do ombro e pare ali.','Desça em 3 segundos resistindo ao cabo, que puxa o tempo todo.','Abdômen travado para o tronco não balançar para trás.'],
+  e:['Subir acima do ombro e transferir o esforço para o trapézio.','Usar impulso de quadril a cada repetição.']},
+ {id:'f3e5',n:'Cadeira extensora (06)',s:3,min:10,max:12,rir:'RIR 2',d:'75 s',v:'cadeira extensora técnica correta',
+  p:['quad'],sc:[],
+  x:['Encosto ajustado para o joelho ficar alinhado ao eixo da máquina.','Estenda até quase travar e segure 1 segundo no topo.','Desça em 3 segundos — é a negativa que constrói.','Expire ao estender; não prenda a respiração.'],
+  e:['Jogar o quadril para cima para ajudar — glúteo colado no banco.','Soltar a carga na descida em vez de frear.']},
+ {id:'f3e6',n:'Gêmeos na cadeira horizontal (03)',s:4,min:10,max:12,rir:'RIR 1',d:'60 s',v:'panturrilha leg press horizontal técnica',
+  p:['pant'],sc:[],
+  x:['Ponta do pé na plataforma, calcanhar livre para descer abaixo da linha.','Empurre até a extensão máxima do tornozelo e segure 2 segundos.','Desça até o alongamento completo, sem quicar.','Joelho estendido aqui pega o gastrocnêmio, o músculo do salto.'],
+  e:['Amplitude curta e rápida, o erro mais comum do exercício.','Dobrar o joelho para ajudar a empurrar a plataforma.']},
+ {id:'f3e7',n:'Tríceps pulley',s:3,min:10,max:12,rir:'RIR 2',d:'60 s',v:'tríceps pulley corda técnica correta',
+  p:['triceps'],sc:['antebraco'],
+  x:['Cotovelo colado ao lado do corpo e fixo — só o antebraço se move.','Estenda até travar e abra a corda no fim do movimento.','Volte em 3 segundos, sem deixar o cotovelo subir à frente.','Tronco levemente inclinado e parado durante a série.'],
+  e:['Abrir o cotovelo para longe do corpo e virar uma empurrada.','Balançar o tronco para vencer as últimas repetições.']},
+ {id:'f3e8',n:'Prancha lateral',s:3,min:30,max:45,rir:'até a falha · segundos',d:'45 s',v:'prancha lateral técnica correta',
+  p:['obliquo'],sc:['abdomen','abdutor','gluteo'],
+  x:['De lado, cotovelo embaixo do ombro, corpo em linha reta do pé à cabeça.','Suba o quadril e mantenha ele alto, sem rodar o tronco para o chão.','Registre os segundos no campo de repetições. Cada lado.','Vá até a falha de postura: quando o quadril cair, a série acabou.'],
+  e:['Deixar o quadril descer aos poucos sem perceber.','Rodar o tronco para a frente e sair da prancha lateral de verdade.']}]}};
 
 const AQ=['5 min de bike, corda ou esteira leve','Ponte de glúteo com marcha — 10 de cada lado','Balanço de perna à frente e lateral — 12 de cada','Rotação externa com elástico — 15','1 série do primeiro exercício com barra vazia ou 50% da carga'];
 
@@ -762,10 +779,15 @@ function hoje(){
 
 const TIPOS=[['MUSC','MUSCULAÇÃO'],['MUAY','MUAY THAI'],['FUT','FUTEBOL'],['NAT','NATAÇÃO'],['MOB','MOBILIDADE']];
 const COR={MUSC:'var(--musc)',MUAY:'var(--muay)',FUT:'var(--fut)',NAT:'var(--nat)',MOB:'var(--mob)'};
-function checkins(){const h=CHK[hj()]||[];
+let ciD=hj();
+function checkins(){const di=$('#ciData');
+ di.max=hj();if(di.value!==ciD)di.value=ciD;
+ di.onchange=()=>{ciD=di.value&&di.value<=hj()?di.value:hj();checkins()};
+ $('#ciTit').textContent=ciD===hj()?'Check-in de hoje':'Check-in de '+fd(ciD);
+ const h=CHK[ciD]||[];
  $('#ciBox').innerHTML=TIPOS.map(t=>`<button data-k="${t[0]}" class="${h.includes(t[0])?'done':''}"><i></i>${t[1]}</button>`).join('');
  $('#ciBox').querySelectorAll('button').forEach(b=>b.onclick=()=>marcar(b.dataset.k))}
-async function marcar(k){const d=hj();CHK[d]=CHK[d]||[];
+async function marcar(k){const d=ciD;CHK[d]=CHK[d]||[];
  const i=CHK[d].indexOf(k);
  if(i>=0){CHK[d].splice(i,1);if(!CHK[d].length)delete CHK[d]}else CHK[d].push(k);
  await store.set(K.c,JSON.stringify(CHK));checkins();semana();evo();
