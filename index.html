@@ -170,6 +170,17 @@ details.guia[open] summary::after{content:"FECHAR"}
 .ci button[data-k=FUT].done{color:var(--fut)}
 .ci button[data-k=NAT].done{color:var(--nat)}
 .ci button[data-k=MOB].done{color:var(--mob)}
+.cid{display:flex;gap:4px;margin-top:10px;overflow-x:auto;padding-bottom:2px;scrollbar-width:none}
+.cid::-webkit-scrollbar{display:none}
+.cid button{flex:1 1 0;min-width:38px;background:var(--surf2);border:1px solid var(--line);border-radius:10px;
+ padding:7px 4px;font-family:var(--disp);display:flex;flex-direction:column;align-items:center;gap:2px}
+.cid button .wd{font-size:9px;letter-spacing:.08em;color:var(--mute)}
+.cid button .dn{font-size:13px;color:var(--white)}
+.cid button .mk{width:5px;height:5px;border-radius:50%;background:var(--acc);opacity:0}
+.cid button.has .mk{opacity:1}
+.cid button.on{background:var(--white);border-color:var(--white)}
+.cid button.on .wd,.cid button.on .dn{color:var(--bg)}
+.cid button.on .mk{background:var(--bg)}
 
 /* ---------- barra geral + filtro ---------- */
 .gbar{display:flex;height:16px;border-radius:8px;overflow:hidden;margin-top:11px;background:var(--surf2);gap:2px}
@@ -368,17 +379,21 @@ nav button.on{color:var(--musc)}
 <!-- HOJE -->
 <section class="view on" id="v-hoje">
   <div class="card">
+    <h3 id="ciTit">Check-in de hoje</h3>
+    <p class="lede">Escolha o dia e marque o que você treinou. Esqueceu de marcar? Toque em um dia atrás.</p>
+    <div class="cid" id="ciDias"></div>
+    <div class="ci" id="ciBox"></div>
+    <details style="margin-top:10px">
+      <summary style="font-family:var(--disp);font-size:10px;letter-spacing:.1em;color:var(--mute);cursor:pointer">DIA MAIS ANTIGO</summary>
+      <div class="fl" style="margin-top:8px"><label>Escolher data</label><input type="date" id="ciData"></div>
+    </details>
+  </div>
+
+  <div class="card">
     <div style="font-family:var(--disp);font-size:9.5px;letter-spacing:.18em;color:var(--mute)" id="dLabel"></div>
     <h2 id="dTitle" style="margin-top:5px">—</h2>
     <p class="lede" id="dSub"></p>
     <div class="rw" id="dAct" style="margin-top:11px"></div>
-  </div>
-
-  <div class="card">
-    <h3 id="ciTit">Check-in de hoje</h3>
-    <p class="lede">Marque tudo que você treinou. O painel inteiro vem daqui.</p>
-    <div class="fl" style="margin-bottom:10px"><label>Dia do check-in</label><input type="date" id="ciData"></div>
-    <div class="ci" id="ciBox"></div>
   </div>
 
   <div class="card">
@@ -780,9 +795,15 @@ function hoje(){
 const TIPOS=[['MUSC','MUSCULAÇÃO'],['MUAY','MUAY THAI'],['FUT','FUTEBOL'],['NAT','NATAÇÃO'],['MOB','MOBILIDADE']];
 const COR={MUSC:'var(--musc)',MUAY:'var(--muay)',FUT:'var(--fut)',NAT:'var(--nat)',MOB:'var(--mob)'};
 let ciD=hj();
+function ultimos(n){const a=[],b=new Date();b.setHours(12,0,0,0);
+ for(let i=0;i<n;i++){const d=new Date(b);d.setDate(b.getDate()-i);a.push(iso(d))}return a}
 function checkins(){const di=$('#ciData');
  di.max=hj();if(di.value!==ciD)di.value=ciD;
  di.onchange=()=>{ciD=di.value&&di.value<=hj()?di.value:hj();checkins()};
+ const dias=ultimos(7);if(!dias.includes(ciD))dias.push(ciD);
+ $('#ciDias').innerHTML=dias.map(d=>{const wd=d===hj()?'HOJE':ROT[(new Date(d+'T12:00:00').getDay()+6)%7];
+  return `<button data-d="${d}" class="${d===ciD?'on':''}${(CHK[d]||[]).length?' has':''}"><span class="wd">${wd}</span><span class="dn">${d.slice(8,10)}</span><span class="mk"></span></button>`}).join('');
+ $('#ciDias').querySelectorAll('button').forEach(b=>b.onclick=()=>{ciD=b.dataset.d;checkins()});
  $('#ciTit').textContent=ciD===hj()?'Check-in de hoje':'Check-in de '+fd(ciD);
  const h=CHK[ciD]||[];
  $('#ciBox').innerHTML=TIPOS.map(t=>`<button data-k="${t[0]}" class="${h.includes(t[0])?'done':''}"><i></i>${t[1]}</button>`).join('');
