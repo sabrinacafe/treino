@@ -794,7 +794,7 @@ async function marcar(k){const d=ciD;CHK[d]=CHK[d]||[];
  tst(i>=0?'CHECK-IN REMOVIDO':'CHECK-IN REGISTRADO')}
 
 /* ============ FICHAS ============ */
-let fa='A';const rc={};
+let fa='A',fD=hj();const rc={};
 function abrir(l){fa=l;nav('treino')}
 function ficha(){
  $('#fTabs').innerHTML=Object.keys(P).map(k=>`<button class="tab ${k===fa?'on':''}" data-f="${k}">${k} · ${P[k].nome}</button>`).join('');
@@ -826,9 +826,11 @@ function ficha(){
     <div class="glab">ERROS COMUNS</div><ul class="gerr">${e.e.map(t=>`<li>${t}</li>`).join('')}</ul>
     <a class="vlink" target="_blank" rel="noopener" href="https://www.youtube.com/results?search_query=${encodeURIComponent(e.v)}"><i class="pl"></i><span>VER DEMONSTRAÇÃO EM VÍDEO</span></a>
    </div></details></div>`});
- h+=`<div class="card full"><div class="fl"><label>Como foi a sessão</label><input type="text" id="nota" placeholder="joelho ok · dormi mal · ombro incomodou"></div>
-  <button class="btn" style="margin-top:10px" onclick="salvar()">SALVAR TREINO ${p.l}</button></div>`;
+ h+=`<div class="card full"><div class="fl"><label>Data do treino</label><input type="date" id="fData" max="${hj()}" value="${fD}"></div>
+  <div class="fl" style="margin-top:10px"><label>Como foi a sessão</label><input type="text" id="nota" placeholder="joelho ok · dormi mal · ombro incomodou"></div>
+  <button class="btn" style="margin-top:10px" onclick="salvar()">SALVAR TREINO ${p.l}${fD===hj()?'':' — '+fd(fD)}</button></div>`;
  $('#fBody').innerHTML=h;
+ const fdi=$('#fData');fdi.onchange=()=>{fD=fdi.value&&fdi.value<=hj()?fdi.value:hj();ficha()};
  $('#fBody').querySelectorAll('input[data-e]').forEach(i=>{const k=i.dataset.e+'|'+i.dataset.i+'|'+i.dataset.f;
   if(rc[k]!==undefined)i.value=rc[k];i.oninput=()=>rc[k]=i.value})}
 
@@ -839,14 +841,15 @@ async function salvar(){
   for(let i=0;i<nb;i++){const kg=nm(rc[e.id+'|'+i+'|kg']||0),r=nm(rc[e.id+'|'+i+'|reps']||0);
    sets[e.id].push({kg,reps:r});if(r>0){ok=true;if(ant>0&&e1(kg,r)>ant)pr=true}}});
  if(!ok){tst('PREENCHA AO MENOS UMA SÉRIE');return}
- SES.push({id:Date.now(),treino:fa,data:hj(),sets,nota:($('#nota')||{}).value||''});
+ const d=fD;
+ SES.push({id:Date.now(),treino:fa,data:d,sets,nota:($('#nota')||{}).value||''});
  SES.sort((a,b)=>a.data.localeCompare(b.data));
  await store.set(K.s,JSON.stringify(SES));
- const d=hj();CHK[d]=CHK[d]||[];if(!CHK[d].includes('MUSC'))CHK[d].push('MUSC');
+ CHK[d]=CHK[d]||[];if(!CHK[d].includes('MUSC'))CHK[d].push('MUSC');
  await store.set(K.c,JSON.stringify(CHK));
- Object.keys(rc).forEach(k=>delete rc[k]);
+ Object.keys(rc).forEach(k=>delete rc[k]);fD=hj();
  ficha();evo();hist();semana();checkins();
- tst(pr?'SIUUU! RECORDE PESSOAL':'TREINO '+p.l+' SALVO',pr)}
+ tst(pr?'SIUUU! RECORDE PESSOAL':'TREINO '+p.l+' SALVO'+(d===hj()?'':' EM '+fd(d)),pr)}
 
 /* ============ MOBILIDADE ============ */
 let ma='M1';
